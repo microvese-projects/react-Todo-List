@@ -1,11 +1,11 @@
 import './App.css';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Form from './components/Form';
-import { useEffect, useState } from 'react';
 import Todos from './components/Todos';
 
 function App() {
-  const items = JSON.parse(localStorage.getItem("todos"))
+  const items = JSON.parse(localStorage.getItem('todos'));
   const [todos, setTodos] = useState(items || []);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function App() {
   }, [todos, setTodos]);
 
   function add(todo) {
-    setTodos(prev => [...prev, {
+    setTodos((prev) => [...prev, {
       description: todo,
       completed: false,
       id: Math.floor(Math.random() * 1000),
@@ -22,48 +22,46 @@ function App() {
   }
 
   function updateCompleted(number) {
-    setTodos(prev => {
-      return prev.map((each) => {
-        if (each.id === number) {
-          return {
-            ...each,
-            completed: !each.completed,
-          }
-        }
-        return each;
-      })
-    })
+    setTodos((prev) => prev.map((each) => {
+      if (each.id === number) {
+        return {
+          ...each,
+          completed: !each.completed,
+        };
+      }
+      return each;
+    }));
   }
 
   function edit(id, todoText) {
-    setTodos(prev => {
-      return prev.map((each) => {
-        if (each.id === id) {
-          return {
-            ...each,
-            description: todoText,
-            editable: !each.editable,
-          }
-        }
-        return each;
-      })
-    })
-    console.log(todos);
+    setTodos((prev) => prev.map((each) => {
+      if (each.id === id) {
+        return {
+          ...each,
+          description: todoText,
+          editable: !each.editable,
+        };
+      }
+      return each;
+    }));
   }
 
   function remove(id) {
-    setTodos(prev => {
-      return prev.filter((each) => {
-        return each.id !== id
-      })
-    })
+    setTodos((prev) => prev.filter((each) => each.id !== id));
   }
 
   return (
     <div className="App">
       <Header />
-      <Form add={add} />
-      <Todos todos={todos} updateCompleted={updateCompleted} edit={edit} remove={remove} />
+      <Form
+        add={(text) => add(text)}
+      />
+      <Todos
+        todos={todos}
+        updateCompleted={(number) => updateCompleted(number)}
+        edit={(id, todoText) => edit(id, todoText)}
+        remove={(id) => remove(id)}
+      />
     </div>
   );
 }

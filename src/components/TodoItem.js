@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function TodoItem({
   todo, updateCompleted, edit, remove,
 }) {
-
   const [todoText, setTodoText] = useState();
 
-  function handleClick(e) {
+  function handleClick() {
     if (!todo.editable) {
       updateCompleted(todo?.id);
     }
@@ -17,44 +17,60 @@ function TodoItem({
   }
 
   function handleEditClick() {
-    setTodoText(todo.description)
+    setTodoText(todo.description);
     edit(todo?.id, todoText);
   }
 
-  return(
+  return (
     <li className="todoItem">
-      <input 
-        type="checkbox" 
-        checked={todo.completed} 
-        onChange={handleClick} 
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={handleClick}
       />
-      {todo.editable 
-        ? 
-        <input 
-          type="text"
-          value={todoText}
-          onChange={(e) => setTodoText(e.target.value)}
-        /> 
-        :
-        <p
-          className={todo.completed ? "task completed" : "task"} 
-          onClick={handleClick}>
+      {todo.editable
+        ? (
+          <input
+            type="text"
+            value={todoText}
+            onChange={(e) => setTodoText(e.target.value)}
+          />
+        )
+        : (
+          <p
+            className={todo.completed ? 'task completed' : 'task'}
+          >
             {todo.description}
-        </p>}
-      <button 
-        className="edit" 
+          </p>
+        )}
+      <button
+        type="button"
+        className="edit"
         onClick={handleEditClick}
       >
-          {todo.editable ? "Save" : "Edit"}
+        {todo.editable ? 'Save' : 'Edit'}
       </button>
-      <button 
-        className="delete" 
+      <button
+        type="button"
+        className="delete"
         onClick={handleRemoveClick}
       >
         Delete
       </button>
     </li>
-  )
+  );
 }
+
+TodoItem.propTypes = {
+  todo: PropTypes.shape({
+    editable: PropTypes.bool,
+    id: PropTypes.number,
+    description: PropTypes.string,
+    completed: PropTypes.bool,
+  }).isRequired,
+  edit: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  updateCompleted: PropTypes.func.isRequired,
+};
 
 export default TodoItem;

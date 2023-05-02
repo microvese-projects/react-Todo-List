@@ -5,8 +5,8 @@
 }
 
 body {
-  background-color: #DAA89B;
-  color: #2C0E37;
+  background-color: #daa89b;
+  color: #2c0e37;
 }
 
 .App {
@@ -28,18 +28,23 @@ form {
   background: white;
   padding: 10px;
   border-radius: 8px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  align-items: center;
   gap: 5px;
+  position: relative;
 }
 
-form input {
+input {
   border: none;
   padding-left: 10px;
   background: white;
   outline: none;
+  font-size: 1.5rem;
+  height: 40px;
 }
 
-form label {
+form label span {
   display: none;
 }
 
@@ -56,22 +61,31 @@ button[type=submit] {
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: all 0.3 linear;
 }
 
 button[type=submit]:hover {
   color: #690375;
-  background: #CB429F;
+  background: #cb429f;
+}
+
+button[type='button'] {
+  padding: 10px;
+  font-weight: bold;
 }
 
 .todoItem {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr 1fr;
   padding: 10px;
-  background-color: #CB429F;
+  background-color: #cb429f;
   gap: 5px;
   margin-block-end: 5px;
   font-size: 1.2rem;
+  align-items: center;
+}
+
+input[type='checkbox'] {
+  max-height: 25px;
 }
 
 .completed {
