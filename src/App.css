@@ -1,38 +1,94 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #daa89b;
+  color: #2c0e37;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: grid;
+  place-items: center;
+  font-size: calc(1.5rem + 1vw);
+  height: 150px;
+}
+
+form {
+  border: 1px solid red;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 30px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 5px;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+input {
+  border: none;
+  padding-left: 10px;
+  background: white;
+  outline: none;
+  font-size: 1.5rem;
+  height: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form label span {
+  display: none;
+}
+
+#task {
+  width: 100%;
+}
+
+button[type=submit] {
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 30px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+button[type=submit]:hover {
+  color: #690375;
+  background: #cb429f;
+}
+
+button[type='button'] {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.todoItem {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr;
+  padding: 10px;
+  background-color: #cb429f;
+  gap: 5px;
+  margin-block-end: 5px;
+  font-size: 1.2rem;
+  align-items: center;
+}
+
+input[type='checkbox'] {
+  max-height: 25px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: rgba(44, 14, 55, 0.4);
 }
